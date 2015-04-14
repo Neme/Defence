@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="win32">
+      <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Game">
+      <UniqueIdentifier>{d824a6ae-1bb6-402b-8d12-87bb5ba17ffb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Util">
+      <UniqueIdentifier>{935f7ca3-f85e-449d-afa7-146665ef0770}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Game\Entity">
+      <UniqueIdentifier>{20002fd8-02f9-4edd-acea-2732b4b18105}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Game\Layer">
+      <UniqueIdentifier>{15587342-61e2-458a-adb5-4413770bae04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Game\Level">
+      <UniqueIdentifier>{d7349384-3916-4fe6-ae98-85b2b42580ba}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Util\Util.cpp">
+      <Filter>src\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Game\GameManager.cpp">
+      <Filter>src\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Game\GameScene.cpp">
+      <Filter>src\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Game\Level\LevelManager.cpp">
+      <Filter>src\Game\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Game\Level\RandomTreeLevel.cpp">
+      <Filter>src\Game\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Game\Level\Level.cpp">
+      <Filter>src\Game\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Game\Layer\GameLayer.cpp">
+      <Filter>src\Game\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Game\Layer\GUILayer.cpp">
+      <Filter>src\Game\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Game\Layer\BackgroundLayer.cpp">
+      <Filter>src\Game\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Game\Entity\Entity.cpp">
+      <Filter>src\Game\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Game\Entity\EntityManager.cpp">
+      <Filter>src\Game\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Game\Entity\Packet.cpp">
+      <Filter>src\Game\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Game\Entity\Tower.cpp">
+      <Filter>src\Game\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Game\Entity\Edge.cpp">
+      <Filter>src\Game\Entity</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="main.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Const.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Util\Util.h">
+      <Filter>src\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game\GameManager.h">
+      <Filter>src\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game\GameScene.h">
+      <Filter>src\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game\Level\LevelManager.h">
+      <Filter>src\Game\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game\Level\RandomTreeLevel.h">
+      <Filter>src\Game\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game\Level\Level.h">
+      <Filter>src\Game\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game\Layer\GameLayer.h">
+      <Filter>src\Game\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game\Layer\GUILayer.h">
+      <Filter>src\Game\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game\Layer\BackgroundLayer.h">
+      <Filter>src\Game\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game\Entity\Entity.h">
+      <Filter>src\Game\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game\Entity\EntityManager.h">
+      <Filter>src\Game\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game\Entity\Packet.h">
+      <Filter>src\Game\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game\Entity\Tower.h">
+      <Filter>src\Game\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game\Entity\Edge.h">
+      <Filter>src\Game\Entity</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="game.rc">
+      <Filter>resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
