@@ -1,7 +1,8 @@
 #include "GameScene.h"
 #include "Level/RandomTreeLevel.h"
+#include "GameManager.h"
 
-USING_NS_CC;
+using namespace cocos2d;
 
 //-----------------------------------------------------------//
 bool GameScene::init()
@@ -17,6 +18,10 @@ bool GameScene::init()
 	this->addChild(m_backgroundLayer);
 	this->addChild(m_gameLayer);
 	this->addChild(m_guiLayer);
+
+	auto lvlMgr = GameManager::get<LevelManager>();
+	lvlMgr->spawnLevel<RandomTreeLevel>();
+	m_gameLayer->setGameLevel(*lvlMgr->getCurrentLevel<RandomTreeLevel>());
 
     return true;
 }

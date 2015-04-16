@@ -5,7 +5,7 @@
 #include "../GameManager.h"
 #include "../Level/RandomTreeLevel.h"
 
-USING_NS_CC;
+using namespace cocos2d;
 
 
 //---------------------------------------------------------------------//
@@ -42,7 +42,7 @@ void GUILayer::createDebugUI()
 	});
 	this->addChild(toggleDebugBtn);
 
-	auto level = GameManager::get<LevelManager>().getCurrentLevel<RandomTreeLevel>();
+	auto level = GameManager::get<LevelManager>()->getCurrentLevel<RandomTreeLevel>();
 
 	//Button vector
 	//Structure:

@@ -1,6 +1,6 @@
 #include "Edge.h"
 
-USING_NS_CC;
+using namespace cocos2d;
 
 //---------------------------------------------------------------------//
 Edge::Edge(Tower& startTower, Tower& endTower)
@@ -23,11 +23,6 @@ Edge::Edge(Tower& startTower, Tower& endTower)
 
 	///Random time seed so the edges do not wave simultaneously
 	m_timeSeed = CCRANDOM_0_1() * 10.0f;
-
-}
-//---------------------------------------------------------------------//
-Edge::~Edge()
-{
 
 }
 //---------------------------------------------------------------------//

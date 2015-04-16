@@ -19,7 +19,7 @@ public:
 
 	//Usage: GameManage::get<LevelManager>()
 	template<typename T>
-	static T& get() {
+	static T* get() {
 		return m_instance.m_managers.get<T>();
 	}
 	

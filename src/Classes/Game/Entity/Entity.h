@@ -4,26 +4,30 @@
 #include "cocos2d.h"
 #include "Const.h"
 
-template<class T = cocos2d::Sprite>
-class Entity : public T
-{
-	static_assert(std::is_base_of<cocos2d::Node, T>::value, "Entity must derive from cocos2d::node");
+enum class EntityTag : int {
+	Remove = -2,
+	// -1 is used as default tag in cocos
+	None = 0,
+	Tower = 1,
+};
 
+
+class EntityBase {
 public:
-	Entity() {
-		if (!T::init())
-			return;
-		this->retain();
-	}
-
-	virtual ~Entity() {
-		this->release();
-	}
-
-private:
-
-
+	virtual ~EntityBase(){};
 
 };
+
+template<typename T = cocos2d::Sprite>
+class Entity : public EntityBase, public T
+{
+	static_assert(std::is_base_of<cocos2d::Node, T>::value, "Entity must inherit from a cocos::node");
+
+public:
+	using CocosBase = T;
+
+	virtual ~Entity(){};
+};
+
 
 #endif // __ENTITY_H__

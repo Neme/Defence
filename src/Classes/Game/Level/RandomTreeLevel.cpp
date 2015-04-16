@@ -1,6 +1,7 @@
 #include "RandomTreeLevel.h"
 #include "../Entity/Tower.h"
-USING_NS_CC;
+
+using namespace cocos2d;
 
 //---------------------------------------------------------------------//
 RandomTreeLevel::RandomTreeLevel()
@@ -75,15 +76,15 @@ void RandomTreeLevel::spawn()
 
 			//Create towers
 			auto tower = m_entityManager->addEntity<Tower>();
-			tower.setParentTower(parentNode);
-			parentNode.addChildTower(tower);
-			tower.setPosition(newPos);
+			tower->setParentTower(parentNode);
+			parentNode.addChildTower(*tower);
+			tower->setPosition(newPos);
 
 			//Push tower to m_towers
 			
 
 			//Call recursive lambda function
-			createNodes(tower, ++depth);
+			createNodes(*tower, ++depth);
 
 		}
 
@@ -91,12 +92,12 @@ void RandomTreeLevel::spawn()
 
 	//Create main tower
 	auto mainTower = m_entityManager->addEntity<Tower>();
-	mainTower.setTowerType(TowerType::TYPE_ALLY);
-	mainTower.setTowerJob(TowerJob::JOB_SPAWNER);
+	mainTower->setTowerType(TowerType::TYPE_ALLY);
+	mainTower->setTowerJob(TowerJob::JOB_SPAWNER);
 	
 
 	//Call recursive lambda function
-	createNodes(mainTower, 0);
+	createNodes(*mainTower, 0);
 
 	//--------------------------------//
 

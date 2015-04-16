@@ -2,13 +2,21 @@
 #define __LEVEL_MANAGER_H__
 
 #include "Level.h"
-#include <vector>
 #include <memory>
+#include <functional>
+#include <vector>
+
 #include <type_traits>
 
 class LevelManager
 {
 public:
+	LevelManager();
+	~LevelManager(){};
+
+	LevelManager(const LevelManager& other){};
+	LevelManager& operator=(const LevelManager& other){ return *this; };
+
 	template<typename T>
 	T* getCurrentLevel(){ return dynamic_cast<T*>(m_currentLevel); }
 
@@ -18,7 +26,7 @@ public:
 		auto lvl = new T{ std::forward<TArgs>(mArgs)... };
 		lvl->spawn();
 		m_currentLevel = static_cast<Level*>(lvl);
-		m_levels.push_back(std::make_unique<T>(lvl));
+		m_levels.emplace_back(lvl);
 	}
 
 private:

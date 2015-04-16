@@ -5,7 +5,7 @@
 //---------------------------------------------------------------------//
 Level::Level()
 {
-	m_entityManager = &GameManager::get<EntityManager>();
+	m_entityManager = GameManager::get<EntityManager>();
 }
 //---------------------------------------------------------------------//
 Level::~Level()

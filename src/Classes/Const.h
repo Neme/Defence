@@ -9,11 +9,6 @@
 #endif
 #endif
 
-enum class NodeTags : int {
-	TAG_REMOVE = -13,
-	TAG_TOWER = 1,
-};
-
 enum class SceneTags : int {
 	SCENE_NONE,
 	SCENE_GAME,

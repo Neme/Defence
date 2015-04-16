@@ -4,7 +4,7 @@
 #include "Const.h"
 
 
-USING_NS_CC;
+using namespace cocos2d;
 
 //---------------------------------------------------------------------//
 Tower::Tower()
@@ -12,31 +12,6 @@ Tower::Tower()
 	static int s_towerId = 1;
 	m_towerUuid = s_towerId++;
 
-	this->setTextureRect({ 0, 0, 80, 80 });
-	this->setTowerType(TowerType::TYPE_NEUTRAL);
-	this->setTowerJob(TowerJob::JOB_NORMAL);
-	this->setTag((int)NodeTags::TAG_TOWER);
-
-	//Init shader
-	if (!ShaderCache::getInstance()->getGLProgram("shader_tower")) {
-		auto shader = GLProgram::createWithFilenames("shader/tower.vert", "shader/tower.frag");
-		shader->link();
-		shader->updateUniforms();
-		ShaderCache::getInstance()->addGLProgram(shader, "shader_tower");
-	}
-
-	auto shader = ShaderCache::getInstance()->getGLProgram("shader_tower");
-
-	auto glProgramState = GLProgramState::create(shader);
-	glProgramState->setUniformVec2("towerSize", this->getContentSize());
-	glProgramState->setUniformFloat("pulseTime", CCRANDOM_0_1() * 15 + 10);
-
-
-	this->setGLProgram(shader);
-	this->setGLProgramState(glProgramState);
-
-
-	this->initEventListener();
 }
 //---------------------------------------------------------------------//
 Tower* Tower::getRandomChildTower()
@@ -218,6 +193,42 @@ void Tower::pulse(float delta)
 		}
 
 	}
+}
+//---------------------------------------------------------------------//
+bool Tower::init()
+{
+
+	if (!CocosBase::init())
+		return false;
+
+
+	this->setTowerType(TowerType::TYPE_NEUTRAL);
+	this->setTowerJob(TowerJob::JOB_NORMAL);
+	this->setTextureRect({ 0, 0, 80, 80 });
+	this->setTag((int)EntityTag::Tower);
+
+	//Init shader
+	if (!ShaderCache::getInstance()->getGLProgram("shader_tower")) {
+		auto shader = GLProgram::createWithFilenames("shader/tower.vert", "shader/tower.frag");
+		shader->link();
+		shader->updateUniforms();
+		ShaderCache::getInstance()->addGLProgram(shader, "shader_tower");
+	}
+
+	auto shader = ShaderCache::getInstance()->getGLProgram("shader_tower");
+
+	auto glProgramState = GLProgramState::create(shader);
+	glProgramState->setUniformVec2("towerSize", this->getContentSize());
+	glProgramState->setUniformFloat("pulseTime", CCRANDOM_0_1() * 15.0f + 10.0f);
+
+
+	this->setGLProgram(shader);
+	this->setGLProgramState(glProgramState);
+
+
+	this->initEventListener();
+
+	return true;
 }
 
 //-----------------------------------------------------------//

@@ -10,11 +10,6 @@ class Level
 public:
 	Level();
 	virtual ~Level();
-	
-	//TEST!! REMOVE
-	Level(const Level&) {
-		auto s = 0;
-	}
 
 	virtual void spawn(){};
 	virtual void clear();

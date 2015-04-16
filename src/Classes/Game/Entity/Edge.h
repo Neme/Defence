@@ -10,13 +10,9 @@ class Edge : public Entity<cocos2d::DrawNode>
 {
 public:
 
+	Edge(){};
 	Edge(Tower& startTower, Tower& endTower);
-	~Edge();
 
-	//TEST REMOVE
-	Edge(const Edge&) {
-		int s = 0;
-	}
 
 	void update(float delta) override;
 

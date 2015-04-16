@@ -9,11 +9,11 @@
 #include "../GameManager.h"
 
 
-USING_NS_CC;
+using namespace cocos2d;
 
 
 //---------------------------------------------------------------------//
-GameLayer::GameLayer() 
+GameLayer::GameLayer()
 {
 	this->setTag((int)LayerTags::LAYER_GAME);
 
@@ -81,13 +81,13 @@ void GameLayer::initEvents()
 void GameLayer::update(float delta)
 {
 	//Remove objects by tag = -13
-	if (this->getChildByTag((int)NodeTags::TAG_REMOVE))
-		this->removeChildByTag((int)NodeTags::TAG_REMOVE, true);
+	if (this->getChildByTag((int)EntityTag::Remove))
+		this->removeChildByTag((int)EntityTag::Remove, true);
 }
 //---------------------------------------------------------------------//
 void GameLayer::pulse(float delta)
 {
-	auto towers = GameManager::get<EntityManager>().getEntitiesByGroup<Tower>();
+	auto towers = GameManager::get<EntityManager>()->getEntitiesByGroup<Tower>();
 	for (auto tower : towers) {
 		tower->pulse(delta);
 	}
@@ -113,7 +113,7 @@ void GameLayer::setGameLevel(Level& level)
 	auto entetyMgr = GameManager::get<EntityManager>();
 
 	//Create tower edges
-	for (auto tower : entetyMgr.getEntitiesByGroup<Tower>()) {
+	for (auto tower : entetyMgr->getEntitiesByGroup<Tower>()) {
 
 		//Add towers to this layer
 		this->addChild(tower, 999);
@@ -122,8 +122,8 @@ void GameLayer::setGameLevel(Level& level)
 		if (tower->getParentTower() == nullptr)
 			continue;
 
-		auto edge = entetyMgr.addEntity<Edge>(*tower->getParentTower(), *tower);
-		this->addChild(&edge);
+		auto edge = entetyMgr->addEntity<Edge>(*tower->getParentTower(), *tower);
+		this->addChild(edge);
 		
 	}
 }

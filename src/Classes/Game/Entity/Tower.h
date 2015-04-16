@@ -27,6 +27,10 @@ class Tower : public Entity<>
 public:
 	Tower();
 
+
+	bool init() override;
+
+
 	//------------//
 
 	void setParentTower(Tower& tower) { m_parentTower = &tower; }

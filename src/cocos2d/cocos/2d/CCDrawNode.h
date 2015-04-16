@@ -171,7 +171,7 @@ protected:
     bool        _dirtyGLLine;
 
 private:
-    CC_DISALLOW_COPY_AND_ASSIGN(DrawNode);
+   // CC_DISALLOW_COPY_AND_ASSIGN(DrawNode);
 };
 
 NS_CC_END

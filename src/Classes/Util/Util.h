@@ -7,21 +7,17 @@
 namespace util {
 
 	//---------------------------------------------------//
-	template<typename T>
-	static T* create()
+	template<typename T, typename... TArgs>
+	static T* create(TArgs&&... mArgs)
 	{
-		T *pRet = new T{};
-		if (pRet && pRet->init())
+		T *obj = new T{std::forward<TArgs>(mArgs)...};
+		if (obj && obj->init())
 		{
-			pRet->autorelease();
-			return pRet;
+			obj->autorelease();
+			return obj;
 		}
-		else
-		{
-			delete pRet;
-			pRet = nullptr;
-			return nullptr;
-		}
+		delete pRet;
+		return nullptr;
 	}
 	//---------------------------------------------------//
 	template<class... TArgs>
@@ -33,9 +29,9 @@ namespace util {
 		}
 
 		template <class T>
-		T& get()
+		T* get()
 		{
-			return std::get<get_element_count<T, 0, TArgs...>::value>(m_data);
+			return &std::get<get_element_count<T, 0, TArgs...>::value>(m_data);
 		}
 
 

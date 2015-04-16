@@ -1,7 +1,7 @@
 #include "Packet.h"
 #include "../Layer/GameLayer.h"
 
-USING_NS_CC;
+using namespace cocos2d;
 
 
 //---------------------------------------------------------------------//
@@ -44,7 +44,7 @@ void Packet::update(float delta)
 
 	//safety reasons
 	if (!m_edge) {
-		this->setTag((int)NodeTags::TAG_REMOVE);
+		this->setTag((int)EntityTag::Remove);
 		return;
 	}
 
