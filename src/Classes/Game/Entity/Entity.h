@@ -8,8 +8,6 @@
 
 
 enum class EntityTag : int {
-	Remove = -2,
-	// -1 is used as default tag in cocos
 	None = 0,
 	Tower = 1,
 };
