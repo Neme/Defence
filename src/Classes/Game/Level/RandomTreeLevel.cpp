@@ -9,6 +9,11 @@ RandomTreeLevel::RandomTreeLevel()
 
 }
 //---------------------------------------------------------------------//
+RandomTreeLevel::RandomTreeLevel(unsigned int depth) : m_towerNodeDepth{ depth }
+{
+
+}
+//---------------------------------------------------------------------//
 RandomTreeLevel::~RandomTreeLevel()
 {
 
@@ -31,7 +36,7 @@ void RandomTreeLevel::spawn()
 			return;
 
 		//Get node count
-		int nodeCount = CCRANDOM_0_1()*(m_maxChildCount - m_minChildCount) + m_minChildCount;
+		int nodeCount = rand_0_1()*(m_maxChildCount - m_minChildCount) + m_minChildCount;
 
 
 		for (int i = 0; i < nodeCount; i++) {
@@ -55,7 +60,7 @@ void RandomTreeLevel::spawn()
 			}
 
 			//Set vector length parentVec is normalized
-			parentVec *= (CCRANDOM_0_1() * (m_maxEdgeLength - m_minEdgeLength) + m_minEdgeLength);
+			parentVec *= (rand_0_1() * (m_maxEdgeLength - m_minEdgeLength) + m_minEdgeLength);
 
 			//Get final position
 			auto newPos = parentNode.getPosition() + parentVec;
@@ -118,5 +123,7 @@ void RandomTreeLevel::spawn()
 			itr->second->setTowerJob(TowerJob::JOB_SPAWNER);
 		}
 	}
+
+
 
 }

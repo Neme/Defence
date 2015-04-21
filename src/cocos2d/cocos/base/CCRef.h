@@ -114,6 +114,7 @@ public:
      */
     unsigned int getReferenceCount() const;
 
+
 protected:
     /**
      * Constructor

@@ -16,7 +16,7 @@ namespace util {
 			obj->autorelease();
 			return obj;
 		}
-		delete pRet;
+		delete obj;
 		return nullptr;
 	}
 	//---------------------------------------------------//

@@ -14,9 +14,9 @@ class GUILayer : public cocos2d::Layer
 {
 public:
 	GUILayer();
+	bool init() override;
 
-
-	void showTowerUpgrade(Tower* tower);
+	void showTowerUpgrade(Tower& tower);
 	void update(float delta) override;
 	void cameraMoved();
 private:
@@ -24,10 +24,13 @@ private:
 
 
 	//Tower Upgrade
-	cocos2d::ui::Layout* m_towerUpgradeLayout;
+	cocos2d::ui::Layout* m_towerUpgradeLayout{ nullptr };
 	Tower* m_selectedTower{ nullptr };
 	void createTowerUpdateWindow();
 	void toggleTowerUpdateWindow();
+
+	//Debug
+	unsigned int m_towerDepth{ 10 };
 
 
 };

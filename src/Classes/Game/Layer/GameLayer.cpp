@@ -80,40 +80,35 @@ void GameLayer::initEvents()
 //---------------------------------------------------------------------//
 void GameLayer::update(float delta)
 {
-	//Remove objects by tag = -13
-	if (this->getChildByTag((int)EntityTag::Remove))
-		this->removeChildByTag((int)EntityTag::Remove, true);
+	
 }
 //---------------------------------------------------------------------//
 void GameLayer::pulse(float delta)
 {
 	auto towers = GameManager::get<EntityManager>()->getEntitiesByGroup<Tower>();
-	for (auto tower : towers) {
+	for (auto& tower : towers) {
 		tower->pulse(delta);
+
+		if (tower->getTowerJob() == TowerJob::JOB_SPAWNER) {
+			this->spawnPacket(*tower);
+		}
 	}
 }
 //---------------------------------------------------------------------//
-
-/*void GameLayer::spawnPacket(Tower& tower)
+void GameLayer::spawnPacket(Tower& tower)
 {
-	auto level = LevelManager::get().getCurrentLevel<Level>();
-
-	auto childTower = tower->getRandomNeightborTower();
-
-	if (!childTower)
-		return;
-
-	auto packet = Packet::create(tower, childTower, level->getTowerContainer());
-	packet->setPosition(tower->getPosition());
+	auto entityMgr = GameManager::get<EntityManager>();
+	auto packet = entityMgr->addEntity<Packet>(tower, *tower.getRandomNeighborTower());
+	packet->setPosition(tower.getPosition());
 	this->addChild(packet);
-}*/
+}
 //---------------------------------------------------------------------//
 void GameLayer::setGameLevel(Level& level)
 {
-	auto entetyMgr = GameManager::get<EntityManager>();
+	auto entityMgr = GameManager::get<EntityManager>();
 
 	//Create tower edges
-	for (auto tower : entetyMgr->getEntitiesByGroup<Tower>()) {
+	for (auto tower : entityMgr->getEntitiesByGroup<Tower>()) {
 
 		//Add towers to this layer
 		this->addChild(tower, 999);
@@ -122,7 +117,7 @@ void GameLayer::setGameLevel(Level& level)
 		if (tower->getParentTower() == nullptr)
 			continue;
 
-		auto edge = entetyMgr->addEntity<Edge>(*tower->getParentTower(), *tower);
+		auto edge = entityMgr->addEntity<Edge>(*tower->getParentTower(), *tower);
 		this->addChild(edge);
 		
 	}

@@ -16,17 +16,20 @@ class Packet : public Entity<>
 {
 public:
 
-	Packet(Edge& edge);
+	Packet(Tower& startTower, Tower& destTower);
+	bool init() override;
 	void update(float delta) override;
 
 	void setPacketType(PacketType type);
 	PacketType getPacketType() const noexcept { return m_packetType; }
 
 	void setEdge(Edge& edge) { m_edge = &edge; }
-	Edge& getEdge() { return *m_edge; }
+	Edge* getEdge() { return m_edge; }
 
 private:
 	Edge* m_edge{ nullptr };
+	Tower* m_startTower;
+	Tower* m_destTower;
 	float m_timeAlreadyMoved{ 0 };
 
 	PacketType m_packetType{ PacketType::PACKET_NEUTRAL };

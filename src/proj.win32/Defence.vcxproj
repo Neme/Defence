@@ -144,6 +144,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Game\Entity\Edge.cpp" />
     <ClCompile Include="..\Classes\Game\Entity\Entity.cpp" />
+    <ClCompile Include="..\Classes\Game\Entity\EntityBase.cpp" />
     <ClCompile Include="..\Classes\Game\Entity\EntityManager.cpp" />
     <ClCompile Include="..\Classes\Game\Entity\Packet.cpp" />
     <ClCompile Include="..\Classes\Game\Entity\Tower.cpp" />
@@ -163,6 +164,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\Const.h" />
     <ClInclude Include="..\Classes\Game\Entity\Edge.h" />
     <ClInclude Include="..\Classes\Game\Entity\Entity.h" />
+    <ClInclude Include="..\Classes\Game\Entity\EntityBase.h" />
     <ClInclude Include="..\Classes\Game\Entity\EntityManager.h" />
     <ClInclude Include="..\Classes\Game\Entity\Packet.h" />
     <ClInclude Include="..\Classes\Game\Entity\Tower.h" />

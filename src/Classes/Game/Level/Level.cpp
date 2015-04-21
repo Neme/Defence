@@ -15,7 +15,7 @@ Level::~Level()
 //---------------------------------------------------------------------//
 void Level::clear()
 {
-	m_entityManager->clear();
+	m_entityManager->removeAllEntities();
 	//...
 }
 

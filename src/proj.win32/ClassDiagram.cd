@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BackgroundLayer" Collapsed="true">
+    <Position X="9.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>R:\source\cocos\defence\src\Classes\Game\Layer\BackgroundLayer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Edge" Collapsed="true">
+    <Position X="3.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABCAAAEQAAADoAIACAAAAAAIAAgBBAAAAABhAAAEAQA=</HashCode>
+      <FileName>R:\source\cocos\defence\src\Classes\Game\Entity\Edge.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entity&lt;T&gt;" Collapsed="true">
+    <Position X="6" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>R:\source\cocos\defence\src\Classes\Game\Entity\Entity.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EntityManager" Collapsed="true">
+    <Position X="6" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAgAAEBAAAAAAAAAAgAAAAAAAAACAAAA=</HashCode>
+      <FileName>R:\source\cocos\defence\src\Classes\Game\Entity\EntityManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameLayer" Collapsed="true">
+    <Position X="9.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAARAAAQAAAAAAAAAAAAgACAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>R:\source\cocos\defence\src\Classes\Game\Layer\GameLayer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameManager" Collapsed="true">
+    <Position X="7.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAIAAAAAABABAA=</HashCode>
+      <FileName>R:\source\cocos\defence\src\Classes\Game\GameManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameScene" Collapsed="true">
+    <Position X="7.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAEAAAAAAAIAARAAAAAAAAA=</HashCode>
+      <FileName>R:\source\cocos\defence\src\Classes\Game\GameScene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GUILayer" Collapsed="true">
+    <Position X="9.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAQAEAAAEAAAAAAIEAAAAAAAAEAAEAAEAAA=</HashCode>
+      <FileName>R:\source\cocos\defence\src\Classes\Game\Layer\GUILayer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Level" Collapsed="true">
+    <Position X="10.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AECAAAAAAAAAAAAAAAAAAAABAAABAAABAAAAAAAAAAA=</HashCode>
+      <FileName>R:\source\cocos\defence\src\Classes\Game\Level\Level.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LevelManager" Collapsed="true">
+    <Position X="10.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAIAAAAAAEAAACAAAAAAAAAAgAABAABA=</HashCode>
+      <FileName>R:\source\cocos\defence\src\Classes\Game\Level\LevelManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packet" Collapsed="true">
+    <Position X="8.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAABAAAABAIAAgAgAAAAAAEQCA=</HashCode>
+      <FileName>R:\source\cocos\defence\src\Classes\Game\Entity\Packet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomTreeLevel" Collapsed="true">
+    <Position X="10.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAoAAAAACgAAABAEBBAAABAAAADAIAEAAIAwAAABA=</HashCode>
+      <FileName>R:\source\cocos\defence\src\Classes\Game\Level\RandomTreeLevel.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tower" Collapsed="true">
+    <Position X="6" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAwEYEAAAgbAAAAEAAQABCgwAIELCKCEABAAgAQA=</HashCode>
+      <FileName>R:\source\cocos\defence\src\Classes\Game\Entity\Tower.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

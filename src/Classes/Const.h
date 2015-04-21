@@ -3,7 +3,6 @@
 
 #if defined(_MSC_VER)
 #if _MSC_VER < 1900
-#define CROW_MSVC_WORKAROUND
 #define constexpr const
 #define noexcept throw()
 #endif

@@ -11,8 +11,13 @@ using namespace cocos2d;
 //---------------------------------------------------------------------//
 GUILayer::GUILayer()
 {
+	
+}
+//---------------------------------------------------------------------//
+bool GUILayer::init()
+{
 	if (!Layer::init())
-		return;
+		return false;
 
 	this->setTag((int)LayerTags::LAYER_GUI);
 
@@ -20,6 +25,8 @@ GUILayer::GUILayer()
 	this->scheduleUpdate();
 
 	this->createTowerUpdateWindow();
+
+	return true;
 }
 //---------------------------------------------------------------------//
 void GUILayer::createDebugUI()
@@ -42,7 +49,7 @@ void GUILayer::createDebugUI()
 	});
 	this->addChild(toggleDebugBtn);
 
-	auto level = GameManager::get<LevelManager>()->getCurrentLevel<RandomTreeLevel>();
+
 
 	//Button vector
 	//Structure:
@@ -54,9 +61,9 @@ void GUILayer::createDebugUI()
 		//New button
 		std::make_tuple(
 			"btn_new.png","btn_new.png",
-			[this](Ref* pSender, ui::Widget::TouchEventType type){
+			[](Ref* pSender, ui::Widget::TouchEventType type){
 				if (type == ui::Widget::TouchEventType::ENDED) {
-					//level->spawnTowers();
+					GameManager::get<LevelManager>()->spawnLevel<RandomTreeLevel>();
 				}
 			}
 		),
@@ -64,9 +71,9 @@ void GUILayer::createDebugUI()
 		//Not set jet
 		std::make_tuple(
 			"btn_new.png", "btn_new.png",
-			[this](Ref* pSender, ui::Widget::TouchEventType type){
+			[](Ref* pSender, ui::Widget::TouchEventType type){
 				if (type == ui::Widget::TouchEventType::ENDED) {
-					//m_game->spawnTowers();
+					GameManager::get<LevelManager>()->spawnLevel<RandomTreeLevel>();
 				}
 			}
 		),
@@ -74,9 +81,9 @@ void GUILayer::createDebugUI()
 		//increase depth
 		std::make_tuple(
 			"btn_plus.png","btn_plus.png",
-			[&level](Ref* pSender, ui::Widget::TouchEventType type){
+			[this](Ref* pSender, ui::Widget::TouchEventType type){
 				if (type == ui::Widget::TouchEventType::ENDED) {
-					level->setTowerNodeDepth(level->getTowerNodeDepth() + 1);
+					GameManager::get<LevelManager>()->spawnLevel<RandomTreeLevel>(++m_towerDepth);
 				}
 			}
 		),
@@ -84,90 +91,9 @@ void GUILayer::createDebugUI()
 		//decrease depth
 		std::make_tuple(
 			"btn_minus.png","btn_minus.png",
-			[&level](Ref* pSender, ui::Widget::TouchEventType type){
+			[this](Ref* pSender, ui::Widget::TouchEventType type){
 				if (type == ui::Widget::TouchEventType::ENDED) {
-					level->setTowerNodeDepth(level->getTowerNodeDepth() - 1);
-				}
-			}
-		),
-
-
-		//increase min child count
-		std::make_tuple(
-			"btn_plus.png", "btn_plus.png",
-			[&level](Ref* pSender, ui::Widget::TouchEventType type){
-				if (type == ui::Widget::TouchEventType::ENDED) {
-					level->setMinChildCount(level->getMinChildCount() + 1);
-				}
-			}
-		),
-
-		//decrease min child count
-		std::make_tuple(
-			"btn_minus.png", "btn_minus.png",
-			[&level](Ref* pSender, ui::Widget::TouchEventType type){
-				if (type == ui::Widget::TouchEventType::ENDED) {
-					level->setMinChildCount(level->getMinChildCount() - 1);
-				}
-			}
-		),
-
-		//increase max child count
-		std::make_tuple(
-			"btn_plus.png", "btn_plus.png",
-			[&level](Ref* pSender, ui::Widget::TouchEventType type){
-				if (type == ui::Widget::TouchEventType::ENDED) {
-					level->setMaxChildCount(level->getMaxChildCount() + 1);
-				}
-			}
-		),
-
-		//decrease max child count
-		std::make_tuple(
-			"btn_minus.png", "btn_minus.png",
-			[&level](Ref* pSender, ui::Widget::TouchEventType type){
-				if (type == ui::Widget::TouchEventType::ENDED) {
-					level->setMaxChildCount(level->getMaxChildCount() - 1);
-				}
-			}
-		),
-
-		//increase min edge length
-		std::make_tuple(
-			"btn_plus.png", "btn_plus.png",
-			[&level](Ref* pSender, ui::Widget::TouchEventType type){
-				if (type == ui::Widget::TouchEventType::ENDED) {
-					level->setMinEdgeLength(level->getMinEdgeLength() + 10);
-				}
-			}
-		),
-
-		//decrease min edge length
-		std::make_tuple(
-			"btn_minus.png", "btn_minus.png",
-			[&level](Ref* pSender, ui::Widget::TouchEventType type){
-				if (type == ui::Widget::TouchEventType::ENDED) {
-					level->setMinEdgeLength(level->getMinEdgeLength() - 10);
-				}
-			}
-		),
-
-		//increase max edge length
-		std::make_tuple(
-			"btn_plus.png", "btn_plus.png",
-			[&level](Ref* pSender, ui::Widget::TouchEventType type){
-				if (type == ui::Widget::TouchEventType::ENDED) {
-					level->setMaxEdgeLength(level->getMaxEdgeLength() + 10);
-				}
-			}
-		),
-
-		//decrease max edge length
-		std::make_tuple(
-			"btn_minus.png", "btn_minus.png",
-			[&level](Ref* pSender, ui::Widget::TouchEventType type){
-				if (type == ui::Widget::TouchEventType::ENDED) {
-					level->setMaxEdgeLength(level->getMaxEdgeLength() - 10);
+					GameManager::get<LevelManager>()->spawnLevel<RandomTreeLevel>(--m_towerDepth);
 				}
 			}
 		),
@@ -193,11 +119,11 @@ void GUILayer::createDebugUI()
 
 }
 //---------------------------------------------------------------------//
-void GUILayer::showTowerUpgrade(Tower* tower)
+void GUILayer::showTowerUpgrade(Tower& tower)
 {
 	auto ws = Director::getInstance()->getWinSize();
 
-	m_selectedTower = tower;
+	m_selectedTower = &tower;
 	auto localPos = m_selectedTower->getParent()->convertToWorldSpace(m_selectedTower->getPosition());
 
 
@@ -256,15 +182,15 @@ void GUILayer::createTowerUpdateWindow()
 	m_towerUpgradeLayout->addChild(background);
 
 
-	auto xOffset = m_towerUpgradeLayout->getSize().width * 0.21f;
+	auto xOffset = m_towerUpgradeLayout->getContentSize().width * 0.21f;
 	for (int i = 0; i < 4; i++) {
 		auto btn = ui::Button::create("img/btn_raw.png", "img/btn_raw_d.png");
-		btn->setScale((m_towerUpgradeLayout->getSize().height * 0.8f) / btn->getSize().height);
+		btn->setScale((m_towerUpgradeLayout->getContentSize().height * 0.8f) / btn->getContentSize().height);
 		btn->setColor({ 10, 10, 10 });
 		btn->setPressedActionEnabled(true);
 
 		btn->setPosition({
-			xOffset + i*(m_towerUpgradeLayout->getSize().height * 0.8f + 10),
+			xOffset + i*(m_towerUpgradeLayout->getContentSize().height * 0.8f + 10),
 			m_towerUpgradeLayout->getContentSize().height*0.5f
 		});
 

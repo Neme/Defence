@@ -4,6 +4,7 @@
 #include <map>
 #include "cocos2d.h"
 #include "Const.h"
+#include "../Entity/Tower.h"
 #include "../Level/LevelManager.h"
 
 class GameLayer : public cocos2d::Layer
@@ -14,7 +15,7 @@ public:
 	void update(float delta) override;
 	void pulse(float delta);
 
-	//void spawnPacket(Tower& tower);
+	void spawnPacket(Tower& tower);
 	void setGameLevel(Level& level);
 	
 

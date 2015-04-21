@@ -75,6 +75,9 @@
     <ClCompile Include="..\Classes\Game\Entity\Edge.cpp">
       <Filter>src\Game\Entity</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Game\Entity\EntityBase.cpp">
+      <Filter>src\Game\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -126,6 +129,9 @@
       <Filter>src\Game\Entity</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Game\Entity\Edge.h">
+      <Filter>src\Game\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game\Entity\EntityBase.h">
       <Filter>src\Game\Entity</Filter>
     </ClInclude>
   </ItemGroup>

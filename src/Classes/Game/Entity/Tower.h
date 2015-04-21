@@ -21,12 +21,12 @@ enum class TowerJob : int
 };
 
 class Packet;
+class Edge;
 
 class Tower : public Entity<>
 {
 public:
 	Tower();
-
 
 	bool init() override;
 
@@ -50,8 +50,13 @@ public:
 	//------------//
 
 	bool hasVulnerableNeighborTower(TowerType friendType, Tower& sender);
-	int getChildrenTowerCount() const noexcept { return m_childrenTowers.size(); };
-	int getNeightborTowerCount() const noexcept { return m_childrenTowers.size() + (m_parentTower ? 1 : 0); };
+	int getChildrenTowerCount() const noexcept { return m_childrenTowers.size(); }
+	int getNeightborTowerCount() const noexcept { return m_childrenTowers.size() + (m_parentTower ? 1 : 0); }
+
+
+	Edge* getEdge(const Tower& neighbor);
+	Edge* getRandomNextEdge(const Tower& lastTower);
+	Edge* getRandomNeighborEdge();
 
 	//------------//
 
@@ -66,14 +71,15 @@ public:
 	//------------//
 	//Game mechanics
 
-	unsigned int getHealth() const noexcept { return m_health; };
-	inline void setHealth(unsigned int health) noexcept { m_health = health; };
+	unsigned int getHealth() const noexcept { return m_health; }
+	inline void setHealth(unsigned int health) noexcept { m_health = health; }
 
-	void setTowerType(TowerType type) noexcept;
-	TowerType getTowerType() const noexcept { return m_towerType; };
+	void setTowerType(TowerType type);
+	TowerType getTowerType() const noexcept { return m_towerType; }
 
-	void setTowerJob(TowerJob job) noexcept;
-	TowerJob getTowerJob() const noexcept { return m_towerJob; };
+	void setTowerJob(TowerJob job);
+	TowerJob getTowerJob() const noexcept { return m_towerJob; }
+
 
 protected:
 	size_t m_towerUuid;

@@ -5,10 +5,16 @@ using namespace cocos2d;
 
 
 //---------------------------------------------------------------------//
-Packet::Packet(Edge& edge)
+Packet::Packet(Tower& startTower, Tower& destTower) 
+:Entity{}, m_startTower{ &startTower }, m_destTower{ &destTower }
 {
-
-	/*m_edge = &m_towerContainer->getEdge(startTower, destTower);
+	m_edge = startTower.getEdge(destTower);
+}
+//---------------------------------------------------------------------//
+bool Packet::init()
+{
+	if (!CocosBase::init())
+		return false;
 
 	this->setTextureRect({ 0, 0, 25, 25 });
 	this->scheduleUpdate();
@@ -34,7 +40,9 @@ Packet::Packet(Edge& edge)
 	glProgramState->setUniformVec2("packetSize", this->getContentSize());
 
 	this->setGLProgram(shader);
-	this->setGLProgramState(glProgramState);*/
+	this->setGLProgramState(glProgramState);
+
+	return true;
 }
 //---------------------------------------------------------------------//
 void Packet::update(float delta)
@@ -42,15 +50,10 @@ void Packet::update(float delta)
 	//passed time
 	m_timeAlreadyMoved += delta;
 
-	//safety reasons
-	if (!m_edge) {
-		this->setTag((int)EntityTag::Remove);
-		return;
-	}
 
-	auto origin = m_edge->getStartTower().getPosition();
-	auto destination = m_edge->getDestTower().getPosition();
-	auto control = m_edge->getControlPoint();
+	auto origin = m_startTower->getPosition();
+	auto destination = m_destTower->getPosition();
+	auto control = m_edge->getMovecControlPoint();
 	auto t = m_timeAlreadyMoved;
 	
 
@@ -63,19 +66,23 @@ void Packet::update(float delta)
 		m_timeAlreadyMoved = 0;
 
 		//Go to next node
-	/*	auto last_tower = m_startTower;
+		auto lastStartTower = m_startTower;
 		m_startTower = m_destTower;
-		m_destTower = m_startTower->getRandomNextTower(last_tower);
-		m_edge = &m_towerContainer->getEdge(m_startTower, m_destTower);
+		m_destTower = m_startTower->getRandomNextTower(*lastStartTower);
 
-
+		//Get edge
+		m_edge = m_startTower->getEdge(*m_destTower);
 
 		//Send packet receive to the tower
-		if (m_startTower->receivePacket(this)) {
-			this->setTag((int)NodeTags::TAG_REMOVE);
+		if (m_startTower->receivePacket(*this)) {
+			this->deleteEntity<Packet>();
+			return;
 		}
-			*/
-	
+			
+		if (!m_edge) {
+			this->deleteEntity<Packet>();
+			return;
+		}
 	}
 
 }

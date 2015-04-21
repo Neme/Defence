@@ -3,6 +3,9 @@
 
 #include "cocos2d.h"
 #include "Const.h"
+#include "EntityBase.h"
+#include "../GameManager.h"
+
 
 enum class EntityTag : int {
 	Remove = -2,
@@ -12,11 +15,6 @@ enum class EntityTag : int {
 };
 
 
-class EntityBase {
-public:
-	virtual ~EntityBase(){};
-
-};
 
 template<typename T = cocos2d::Sprite>
 class Entity : public EntityBase, public T
@@ -26,7 +24,16 @@ class Entity : public EntityBase, public T
 public:
 	using CocosBase = T;
 
-	virtual ~Entity(){};
+	Entity() {
+		m_ptrToCocosNode = this;
+	}
+
+	virtual ~Entity(){}
+
+	template<typename U>
+	void deleteEntity() {
+		GameManager::get<EntityManager>()->removeEntity<U>(*this);
+	}
 };
 
 

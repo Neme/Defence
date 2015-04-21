@@ -2,11 +2,14 @@
 #define __RANDOM_TREE_LEVEL_H__
 
 #include "Level.h"
+#include "Const.h"
 
 class RandomTreeLevel : public Level
 {
 public:
 	RandomTreeLevel();
+	RandomTreeLevel(unsigned int depth);
+
 	~RandomTreeLevel();
 
 

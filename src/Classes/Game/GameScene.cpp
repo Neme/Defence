@@ -10,6 +10,9 @@ bool GameScene::init()
 	if (!Scene::init())
 		return false;
 
+	auto lvlMgr = GameManager::get<LevelManager>();
+	
+
 	m_backgroundLayer = util::create<BackgroundLayer>();
 	m_gameLayer = util::create<GameLayer>();
 	m_guiLayer = util::create<GUILayer>();
@@ -19,9 +22,9 @@ bool GameScene::init()
 	this->addChild(m_gameLayer);
 	this->addChild(m_guiLayer);
 
-	auto lvlMgr = GameManager::get<LevelManager>();
+	lvlMgr->setGameLayer(*m_gameLayer);
 	lvlMgr->spawnLevel<RandomTreeLevel>();
-	m_gameLayer->setGameLevel(*lvlMgr->getCurrentLevel<RandomTreeLevel>());
+
 
     return true;
 }

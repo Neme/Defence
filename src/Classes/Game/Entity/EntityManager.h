@@ -1,13 +1,13 @@
 #ifndef __ENTITY_MANAGER_H__
 #define __ENTITY_MANAGER_H__
 
-#include "Entity.h"
 #include <memory>
 #include <map>
 #include <string>
 #include "Util/Util.h"
-#include "Tower.h"
-#include "Edge.h"
+
+#include "EntityBase.h"
+
 
 class EntityManager
 {
@@ -17,7 +17,7 @@ public:
 	EntityManager();
 
 	template<typename T, typename... TArgs>
-	T* addEntity(TArgs&&... mArgs){
+	T* addEntity(TArgs&&... mArgs) {
 		T* entity = util::create<T>(std::forward<TArgs>(mArgs)...);
 		m_entites.push_back(entity);
 
@@ -27,11 +27,22 @@ public:
 		return entity;
 	}
 
+	template<typename T>
+	void removeEntity(EntityBase& entity) {
+		auto typeHash = typeid(T).hash_code();
+		if (m_entitesGrouped.count(typeHash)) {
+			auto& vec = m_entitesGrouped[typeHash];
+			vec.erase(std::remove(vec.begin(), vec.end(), &entity), vec.end());
+			m_entites.erase(std::remove(m_entites.begin(), m_entites.end(), &entity), m_entites.end());
+		}
+
+		entity.getCocosBase()->removeFromParent();
+	}
+
 	//Usage: getEntitiesByGroup<Tower>()
 	template<typename T>
 	std::vector<T*> getEntitiesByGroup() {
 		auto typeHash = typeid(T).hash_code();
-
 
 		//Checks if typeHash is in m_entitesGrouped
 		if (m_entitesGrouped.count(typeHash)) {
@@ -46,7 +57,18 @@ public:
 		return std::vector<T*>{};
 	}
 
-	void clear() { m_entites.clear(); }
+	void removeAllEntities() { 	
+		for (auto entity : m_entites) {
+			entity->removeEntityFromParent();
+		}
+		m_entites.clear();
+
+		for (auto& itr : m_entitesGrouped) {
+			itr.second.clear();
+		}
+
+
+	}
 
 private:
 	std::vector<EntityBase*> m_entites;

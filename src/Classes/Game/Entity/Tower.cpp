@@ -1,7 +1,8 @@
-#include "Tower.h"
 #include "Packet.h"
-#include "../Layer/GUILayer.h"
 #include "Const.h"
+#include "Tower.h"
+#include "../Layer/GUILayer.h"
+#include "../GameManager.h"
 
 
 using namespace cocos2d;
@@ -22,7 +23,7 @@ Tower* Tower::getRandomChildTower()
 	if (maxPos < 0)
 		return nullptr;
 
-	return m_childrenTowers.at(round(maxPos*CCRANDOM_0_1()));
+	return m_childrenTowers.at(round(maxPos*rand_0_1()));
 }
 //---------------------------------------------------------------------//
 Tower* Tower::getRandomNeighborTower()
@@ -41,7 +42,7 @@ Tower* Tower::getRandomNeighborTower()
 	if (maxPos < 0)
 		return nullptr;
 
-	return vulnerabeChildren.at(round(maxPos*CCRANDOM_0_1()));
+	return vulnerabeChildren.at(round(maxPos*rand_0_1()));
 }
 //---------------------------------------------------------------------//
 Tower* Tower::getRandomNextTower(const Tower& lastTower)
@@ -100,20 +101,18 @@ bool Tower::receivePacket(Packet& packet)
 	if (m_towerJob == TowerJob::JOB_SPAWNER)
 		return true;
 
-	
 
 	bool returnedValue = false;
 
 
-	/*
-	if ((int)packet->getPacketType() != (int)m_towerType) {
+	if ((int)packet.getPacketType() != (int)m_towerType) {
 		m_health--;
 		returnedValue = true;
 
 		if (m_health == 0) {
 			m_health = 5;
 
-			this->setTowerType(static_cast<TowerType>(packet->getPacketType()));
+			this->setTowerType(static_cast<TowerType>(packet.getPacketType()));
 		}
 
 
@@ -125,7 +124,7 @@ bool Tower::receivePacket(Packet& packet)
 	}
 
 	this->setScale(0.5f + 0.1f*m_health);
-	*/
+
 
 	return returnedValue;
 }
@@ -174,7 +173,7 @@ void Tower::initEventListener()
 		if (gui == nullptr)
 			return;
 
-		gui->showTowerUpgrade(this);
+		gui->showTowerUpgrade(*this);
 	};
 
 
@@ -219,7 +218,7 @@ bool Tower::init()
 
 	auto glProgramState = GLProgramState::create(shader);
 	glProgramState->setUniformVec2("towerSize", this->getContentSize());
-	glProgramState->setUniformFloat("pulseTime", CCRANDOM_0_1() * 15.0f + 10.0f);
+	glProgramState->setUniformFloat("pulseTime", rand_0_1() * 15.0f + 10.0f);
 
 
 	this->setGLProgram(shader);
@@ -229,6 +228,30 @@ bool Tower::init()
 	this->initEventListener();
 
 	return true;
+}
+//---------------------------------------------------------------------//
+Edge* Tower::getEdge(const Tower& neighbor)
+{
+	auto edges = GameManager::get<EntityManager>()->getEntitiesByGroup<Edge>();
+
+	for (auto& edge : edges) {
+		if (edge->getStartTower() == this && edge->getDestTower() == &neighbor ||
+			edge->getDestTower() == this && edge->getStartTower() == &neighbor) {
+			return edge;
+		}
+	}
+
+	return nullptr;
+}
+//---------------------------------------------------------------------//
+Edge* Tower::getRandomNextEdge(const Tower& lastTower)
+{
+	return this->getEdge(*this->getRandomNextTower(lastTower));
+}
+//---------------------------------------------------------------------//
+Edge* Tower::getRandomNeighborEdge()
+{
+	return this->getEdge(*this->getRandomNeighborTower());
 }
 
 //-----------------------------------------------------------//
