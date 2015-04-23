@@ -100,9 +100,9 @@ void RandomTreeLevel::spawn()
 
 	//Create main tower
 	auto mainTower = m_entityManager->addEntity<Tower>();
-	mainTower->setTowerType(TowerType::TYPE_ALLY);
-	mainTower->setTowerJob(TowerJob::JOB_SPAWNER);
-	mainTower->setZOrder(999);
+	mainTower->setTowerType(TowerType::Ally);
+	mainTower->setTowerJob(TowerJob::Spawner);
+	mainTower->setLocalZOrder(999);
 
 	//Call recursive lambda function
 	createNodes(*mainTower, 0);
@@ -122,8 +122,8 @@ void RandomTreeLevel::spawn()
 
 	for (auto itr = lastTowerMap.rbegin(); itr != lastTowerMap.rend(); ++itr, ++enemyCount) {
 		if (enemyCount < maxEnemy) {
-			itr->second->setTowerType(TowerType::TYPE_ENEMY);
-			itr->second->setTowerJob(TowerJob::JOB_SPAWNER);
+			itr->second->setTowerType(TowerType::Enemy);
+			itr->second->setTowerJob(TowerJob::Spawner);
 		}
 	}
 

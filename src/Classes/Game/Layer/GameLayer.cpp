@@ -77,11 +77,6 @@ void GameLayer::initEvents()
 
 }
 //---------------------------------------------------------------------//
-void GameLayer::update(float delta)
-{
-	
-}
-//---------------------------------------------------------------------//
 void GameLayer::pulse(float delta)
 {
 	auto towers = GameManager::get<EntityManager>()->getEntitiesByGroup<Tower>();

@@ -21,8 +21,8 @@ bool Packet::init()
 
 	switch (m_startTower->getTowerType())
 	{
-	case TowerType::TYPE_ALLY:		this->setPacketType(PacketType::PACKET_ALLY); break;
-	case TowerType::TYPE_ENEMY:		this->setPacketType(PacketType::PACKET_ENEMY); break;
+	case TowerType::Ally:		this->setPacketType(PacketType::Ally); break;
+	case TowerType::Enemy:		this->setPacketType(PacketType::Enemy); break;
 	default:break;
 	}
 
@@ -74,10 +74,7 @@ void Packet::update(float delta)
 		m_edge = m_startTower->getEdge(*m_destTower);
 
 		//Send packet receive to the tower
-		if (m_startTower->receivePacket(*this)) {
-			this->deleteEntity<Packet>();
-			return;
-		}
+		m_startTower->receivePacket(*this);
 			
 		if (!m_edge) {
 			this->deleteEntity<Packet>();
@@ -93,8 +90,8 @@ void Packet::setPacketType(PacketType type)
 
 	switch (type)
 	{
-	case PacketType::PACKET_ALLY:	this->setColor({ 86, 195, 83 }); break;
-	case PacketType::PACKET_ENEMY:	this->setColor({ 195, 83, 139 }); break;
+	case PacketType::Ally:	this->setColor({ 86, 195, 83 }); break;
+	case PacketType::Enemy:	this->setColor({ 195, 83, 139 }); break;
 	default: break;
 	}
 }

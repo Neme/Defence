@@ -4,27 +4,20 @@
 #include "cocos2d.h"
 #include "Const.h"
 #include "Entity.h"
+#include "TowerUtils.h"
 #include <vector>
+#include <map>
 
-
-enum class TowerType : int 
-{
-	TYPE_NEUTRAL,
-	TYPE_ALLY,
-	TYPE_ENEMY,
-};
-
-enum class TowerJob : int
-{
-	JOB_NORMAL,
-	JOB_SPAWNER,
-};
 
 class Packet;
 class Edge;
 
+//----------------------------------------------------------//
+
 class Tower : public Entity<>
 {
+
+
 public:
 	Tower();
 
@@ -60,19 +53,21 @@ public:
 
 	//------------//
 
-	inline void setPulseTime(float time)  { m_pulseTime = time; }
+	void setPulseTime(float time);
 	float getPulseTime() const { return m_pulseTime; }
 	void pulse(float delta);
 
+	void setDrawMode(TowerDrawMode drawMode);
+	TowerDrawMode getDrawMode() const _noexcept{ return m_drawMode; };
+
 	//------------//
-	//return value = weather packet should be deleted
-	bool receivePacket(Packet& packet);
+	void receivePacket(Packet& packet);
 
 	//------------//
 	//Game mechanics
 
-	unsigned int getHealth() const _noexcept { return m_health; }
-	inline void setHealth(unsigned int health) _noexcept { m_health = health; }
+	TowerHealth& getHealth() { return m_health; }
+	inline void setHealth(int health) { m_health = health; }
 
 	void setTowerType(TowerType type);
 	TowerType getTowerType() const _noexcept { return m_towerType; }
@@ -80,9 +75,9 @@ public:
 	void setTowerJob(TowerJob job);
 	TowerJob getTowerJob() const _noexcept { return m_towerJob; }
 
+	void doGather();
 
 protected:
-	size_t m_towerUuid;
 
 	void initEventListener();
 
@@ -93,10 +88,17 @@ protected:
 	float m_pulseTime{ 1.0f };
 	float m_pulseTimeDelta{ 0.0f };
 
+	TowerDrawMode m_drawMode{ TowerDrawMode::Normal };
+
 	//Game mechanics
-	unsigned int m_health{ 5 };
-	TowerType m_towerType;
-	TowerJob m_towerJob;
+	TowerHealth m_health{ 15 };
+	TowerType m_towerType{TowerType::Neutral};
+	TowerJob m_towerJob{ TowerJob::Normal };
+
+	//Gather
+	bool m_canGather{ false };
+	float m_gatherTimeDelta{ 0.0f };
+	float m_gatherTime{ 10.0f };
 
 };
 

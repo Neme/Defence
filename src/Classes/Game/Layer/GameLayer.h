@@ -11,8 +11,6 @@ class GameLayer : public cocos2d::Layer
 {
 public:
 	GameLayer();
-
-	void update(float delta) override;
 	void pulse(float delta);
 
 private:
