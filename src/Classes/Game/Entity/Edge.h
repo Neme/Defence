@@ -16,8 +16,8 @@ public:
 
 	void update(float delta) override;
 
-	cocos2d::Vec2 getMovecControlPoint() const noexcept{ return m_controlPointMoved; }
-	void setMovedControlPoint(const cocos2d::Vec2& point) noexcept{ m_controlPointMoved = point; }
+	cocos2d::Vec2 getMovecControlPoint() const _noexcept{ return m_controlPointMoved; }
+	void setMovedControlPoint(const cocos2d::Vec2& point) _noexcept{ m_controlPointMoved = point; }
 
 	Tower* getStartTower() { return m_startTower; }
 	void setStartTower(Tower& tower) { m_startTower = &tower; }
@@ -25,11 +25,11 @@ public:
 	Tower* getDestTower() { return m_destTower; }
 	void setDestTower(Tower& tower) { m_destTower = &tower; }
 
-	float getEndgeWidth() const noexcept { return m_edgeSegments; }
-	void setEndgeWidth(float width) noexcept { m_edgeSegments = width; }
+	float getEndgeWidth() const _noexcept { return m_edgeSegments; }
+	void setEndgeWidth(float width) _noexcept { m_edgeSegments = width; }
 
-	cocos2d::Color4F getEndgeColor() const noexcept { return m_edgeColor; }
-	void setEndgeColor(const cocos2d::Color4F& color) noexcept{ m_edgeColor = color; }
+	cocos2d::Color4F getEndgeColor() const _noexcept { return m_edgeColor; }
+	void setEndgeColor(const cocos2d::Color4F& color) _noexcept{ m_edgeColor = color; }
 
 	void draw(cocos2d::Renderer *renderer, const cocos2d::Mat4 &transform, uint32_t flags) override;
 

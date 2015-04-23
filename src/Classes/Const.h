@@ -3,20 +3,14 @@
 
 #if defined(_MSC_VER)
 #if _MSC_VER < 1900
-#define constexpr const
-#define noexcept throw()
+#define _constexpr const
+#define _noexcept throw()
 #endif
 #endif
 
 enum class SceneTags : int {
 	SCENE_NONE,
 	SCENE_GAME,
-};
-
-enum class LayerTags : int {
-	LAYER_NONE,
-	LAYER_GAME,
-	LAYER_GUI,
 };
 
 

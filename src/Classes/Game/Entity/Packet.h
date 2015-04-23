@@ -21,7 +21,7 @@ public:
 	void update(float delta) override;
 
 	void setPacketType(PacketType type);
-	PacketType getPacketType() const noexcept { return m_packetType; }
+	PacketType getPacketType() const _noexcept { return m_packetType; }
 
 	void setEdge(Edge& edge) { m_edge = &edge; }
 	Edge* getEdge() { return m_edge; }

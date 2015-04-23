@@ -50,8 +50,8 @@ public:
 	//------------//
 
 	bool hasVulnerableNeighborTower(TowerType friendType, Tower& sender);
-	int getChildrenTowerCount() const noexcept { return m_childrenTowers.size(); }
-	int getNeightborTowerCount() const noexcept { return m_childrenTowers.size() + (m_parentTower ? 1 : 0); }
+	int getChildrenTowerCount() const _noexcept { return m_childrenTowers.size(); }
+	int getNeightborTowerCount() const _noexcept { return m_childrenTowers.size() + (m_parentTower ? 1 : 0); }
 
 
 	Edge* getEdge(const Tower& neighbor);
@@ -71,14 +71,14 @@ public:
 	//------------//
 	//Game mechanics
 
-	unsigned int getHealth() const noexcept { return m_health; }
-	inline void setHealth(unsigned int health) noexcept { m_health = health; }
+	unsigned int getHealth() const _noexcept { return m_health; }
+	inline void setHealth(unsigned int health) _noexcept { m_health = health; }
 
 	void setTowerType(TowerType type);
-	TowerType getTowerType() const noexcept { return m_towerType; }
+	TowerType getTowerType() const _noexcept { return m_towerType; }
 
 	void setTowerJob(TowerJob job);
-	TowerJob getTowerJob() const noexcept { return m_towerJob; }
+	TowerJob getTowerJob() const _noexcept { return m_towerJob; }
 
 
 protected:

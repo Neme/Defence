@@ -15,20 +15,20 @@ public:
 
 	void spawn() override;
 
-	inline void setTowerNodeDepth(unsigned int val) noexcept { m_towerNodeDepth = val; }
-	unsigned int getTowerNodeDepth() const noexcept { return m_towerNodeDepth; }
+	inline void setTowerNodeDepth(unsigned int val) _noexcept { m_towerNodeDepth = val; }
+	unsigned int getTowerNodeDepth() const _noexcept { return m_towerNodeDepth; }
 
-	inline void setMinChildCount(unsigned int val) noexcept { m_minChildCount = val; }
-	unsigned int getMinChildCount() const noexcept{ return m_minChildCount; }
+	inline void setMinChildCount(unsigned int val) _noexcept { m_minChildCount = val; }
+	unsigned int getMinChildCount() const _noexcept{ return m_minChildCount; }
 
-	inline void setMaxChildCount(unsigned int val) noexcept { m_maxChildCount = val; }
-	unsigned int getMaxChildCount() const noexcept{ return m_maxChildCount; }
+	inline void setMaxChildCount(unsigned int val) _noexcept { m_maxChildCount = val; }
+	unsigned int getMaxChildCount() const _noexcept{ return m_maxChildCount; }
 
-	inline void setMinEdgeLength(unsigned int val) noexcept { m_minEdgeLength = val; }
-	unsigned int getMinEdgeLength() const noexcept{ return m_minEdgeLength; }
+	inline void setMinEdgeLength(unsigned int val) _noexcept { m_minEdgeLength = val; }
+	unsigned int getMinEdgeLength() const _noexcept{ return m_minEdgeLength; }
 
-	inline void setMaxEdgeLength(unsigned int val) noexcept { m_maxEdgeLength = val; }
-	unsigned int getMaxEdgeLength() const noexcept{ return m_maxEdgeLength; }
+	inline void setMaxEdgeLength(unsigned int val) _noexcept { m_maxEdgeLength = val; }
+	unsigned int getMaxEdgeLength() const _noexcept{ return m_maxEdgeLength; }
 
 private:
 	unsigned int m_towerNodeDepth{ 10 };

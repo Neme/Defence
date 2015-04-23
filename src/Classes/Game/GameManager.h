@@ -6,6 +6,7 @@
 #include <tuple>
 #include "Level/LevelManager.h"
 #include "Entity/EntityManager.h"
+#include "Layer/LayerManager.h"
 
 
 class GameManager
@@ -21,7 +22,7 @@ public:
 	static T* get() {
 		return m_instance.m_managers.get<T>();
 	}
-	
+
 
 private:
 
@@ -31,14 +32,17 @@ private:
 	util::DependencyContainer
 	<
 		LevelManager,
-		EntityManager
+		EntityManager,
+		LayerManager
 	> 
 	m_managers 
 	{
 		{}, // LevelManager
-		{}	// EntityManager
+		{},	// EntityManager
+		{}  // LayerManager
 	};
-	
+
+
 };
 
 #endif // __GAME_MANAGER_H__

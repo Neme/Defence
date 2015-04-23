@@ -5,9 +5,8 @@
 #include <map>
 #include <string>
 #include "Util/Util.h"
-
 #include "EntityBase.h"
-
+#include "../Layer/GameLayer.h"
 
 class EntityManager
 {
@@ -16,13 +15,22 @@ public:
 
 	EntityManager();
 
-	template<typename T, typename... TArgs>
-	T* addEntity(TArgs&&... mArgs) {
-		T* entity = util::create<T>(std::forward<TArgs>(mArgs)...);
+
+	template<typename T1, typename T2 = GameLayer, typename... TArgs>
+	T1* addEntity(TArgs&&... mArgs) {
+		auto entity = util::create<T1>(std::forward<TArgs>(mArgs)...);
+
+		if (!entity)
+			return nullptr;
+
 		m_entites.push_back(entity);
 
 		//add entity to group map
-		m_entitesGrouped[typeid(T).hash_code()].push_back(entity);
+		m_entitesGrouped[typeid(T1).hash_code()].push_back(entity);
+
+		//get Layer
+		auto layer = GameManager::get<LayerManager>()->getLayer<T2>();
+		layer->addChild(entity);
 
 		return entity;
 	}

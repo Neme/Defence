@@ -1,7 +1,8 @@
-#include "LevelManager.h"
+#include "LayerManager.h"
+
 
 //---------------------------------------------------------------------//
-LevelManager::LevelManager()
+LayerManager::LayerManager()
 {
-	
+
 }

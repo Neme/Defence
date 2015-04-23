@@ -19,7 +19,7 @@ bool GUILayer::init()
 	if (!Layer::init())
 		return false;
 
-	this->setTag((int)LayerTags::LAYER_GUI);
+
 
 	this->createDebugUI();
 	this->scheduleUpdate();

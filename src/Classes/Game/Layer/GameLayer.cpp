@@ -15,7 +15,6 @@ using namespace cocos2d;
 //---------------------------------------------------------------------//
 GameLayer::GameLayer()
 {
-	this->setTag((int)LayerTags::LAYER_GAME);
 
 	if (!Layer::init())
 		return;
@@ -46,7 +45,7 @@ void GameLayer::initEvents()
 			this->setPosition(this->getPosition() + delta);
 
 			//Hide tower update gui
-			auto gui = static_cast<GUILayer*>(Director::getInstance()->getRunningScene()->getChildByTag((int)LayerTags::LAYER_GUI));
+			auto gui = GameManager::get<LayerManager>()->getLayer<GUILayer>();
 			gui->cameraMoved();
 		}
 		else if (touches.size() == 2) {
@@ -88,40 +87,7 @@ void GameLayer::pulse(float delta)
 	auto towers = GameManager::get<EntityManager>()->getEntitiesByGroup<Tower>();
 	for (auto& tower : towers) {
 		tower->pulse(delta);
-
-		if (tower->getTowerJob() == TowerJob::JOB_SPAWNER) {
-			this->spawnPacket(*tower);
-		}
 	}
 }
 //---------------------------------------------------------------------//
-void GameLayer::spawnPacket(Tower& tower)
-{
-	auto entityMgr = GameManager::get<EntityManager>();
-	auto packet = entityMgr->addEntity<Packet>(tower, *tower.getRandomNeighborTower());
-	packet->setPosition(tower.getPosition());
-	this->addChild(packet);
-}
-//---------------------------------------------------------------------//
-void GameLayer::setGameLevel(Level& level)
-{
-	auto entityMgr = GameManager::get<EntityManager>();
-
-	//Create tower edges
-	for (auto tower : entityMgr->getEntitiesByGroup<Tower>()) {
-
-		//Add towers to this layer
-		this->addChild(tower, 999);
-
-		//tower->getParentTower() == nullptr e.g if tower is maintower
-		if (tower->getParentTower() == nullptr)
-			continue;
-
-		auto edge = entityMgr->addEntity<Edge>(*tower->getParentTower(), *tower);
-		this->addChild(edge);
-		
-	}
-}
-//-----------------------------------------------------------//
-
 

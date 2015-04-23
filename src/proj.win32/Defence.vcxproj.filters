@@ -78,6 +78,9 @@
     <ClCompile Include="..\Classes\Game\Entity\EntityBase.cpp">
       <Filter>src\Game\Entity</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Game\Layer\LayerManager.cpp">
+      <Filter>src\Game\Layer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -133,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Game\Entity\EntityBase.h">
       <Filter>src\Game\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Game\Layer\LayerManager.h">
+      <Filter>src\Game\Layer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

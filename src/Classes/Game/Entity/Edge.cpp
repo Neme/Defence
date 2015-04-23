@@ -96,6 +96,7 @@ void Edge::draw(Renderer *renderer, const Mat4 &transform, uint32_t flags)
 	m_edgeSegments = scale.x / (0.10f + std::fabs(scale.x*0.10f)) + 2.0f;
 
 
+
 	//Actual draw
 	if (visible) {
 		CocosBase::draw(renderer, transform, flags);
@@ -123,5 +124,5 @@ void Edge::updateCullingRect()
 
 }
 
-
 //---------------------------------------------------------------------//
+

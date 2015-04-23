@@ -1,7 +1,9 @@
 #include "Packet.h"
 #include "Const.h"
 #include "Tower.h"
+#include "Packet.h"
 #include "../Layer/GUILayer.h"
+
 #include "../GameManager.h"
 
 
@@ -169,7 +171,7 @@ void Tower::initEventListener()
 	};
 	listener->onTouchEnded = [this](Touch* touch, Event* event) {
 		//Get GUI layer
-		auto gui = static_cast<GUILayer*>(Director::getInstance()->getRunningScene()->getChildByTag((int)LayerTags::LAYER_GUI));
+		auto gui = GameManager::get<LayerManager>()->getLayer<GUILayer>();
 		if (gui == nullptr)
 			return;
 
@@ -188,7 +190,9 @@ void Tower::pulse(float delta)
 		m_pulseTimeDelta = 0;
 
 		if (this->getTowerJob() == TowerJob::JOB_SPAWNER) {
-			//static_cast<GameLayer*>(this->getParent())->spawnPacket(*this);
+			auto entityMgr = GameManager::get<EntityManager>();
+			auto packet = entityMgr->addEntity<Packet>(*this, *this->getRandomNeighborTower());
+			packet->setPosition(this->getPosition());
 		}
 
 	}

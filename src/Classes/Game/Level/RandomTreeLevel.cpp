@@ -1,5 +1,7 @@
 #include "RandomTreeLevel.h"
 #include "../Entity/Tower.h"
+#include "../Entity/Edge.h"
+
 
 using namespace cocos2d;
 
@@ -84,6 +86,7 @@ void RandomTreeLevel::spawn()
 			tower->setParentTower(parentNode);
 			parentNode.addChildTower(*tower);
 			tower->setPosition(newPos);
+			tower->setZOrder(999);
 
 			//Push tower to m_towers
 			
@@ -99,7 +102,7 @@ void RandomTreeLevel::spawn()
 	auto mainTower = m_entityManager->addEntity<Tower>();
 	mainTower->setTowerType(TowerType::TYPE_ALLY);
 	mainTower->setTowerJob(TowerJob::JOB_SPAWNER);
-	
+	mainTower->setZOrder(999);
 
 	//Call recursive lambda function
 	createNodes(*mainTower, 0);
@@ -125,5 +128,14 @@ void RandomTreeLevel::spawn()
 	}
 
 
+	//Create Edges
+	for (auto tower : m_entityManager->getEntitiesByGroup<Tower>()) {
 
+		//tower->getParentTower() == nullptr e.g if tower is maintower
+		if (tower->getParentTower() == nullptr)
+			continue;
+
+		auto edge = m_entityManager->addEntity<Edge>(*tower->getParentTower(), *tower);
+
+	}
 }
